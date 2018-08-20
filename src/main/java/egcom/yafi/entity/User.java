@@ -1,6 +1,7 @@
 package egcom.yafi.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -10,7 +11,8 @@ public class User {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @NotBlank
+    @Column(unique = true)
     private String username;
 
     private LocalDateTime createdOn;
