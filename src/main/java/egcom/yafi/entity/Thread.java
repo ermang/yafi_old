@@ -1,6 +1,7 @@
-package egcom.yaf.entity;
+package egcom.yafi.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
@@ -11,6 +12,7 @@ public class Thread {
     private Long id;
 
     @NotNull
+    @NotBlank
     private String content;
 
     @NotNull

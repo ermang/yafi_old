@@ -1,4 +1,4 @@
-package egcom.yaf.entity;
+package egcom.yafi.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,7 +10,7 @@ public class Topic {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    @NotNull
+    @Column(unique = true, nullable = false)
     private String name;
 
     @NotNull

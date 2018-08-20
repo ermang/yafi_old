@@ -1,4 +1,4 @@
-package egcom.yaf.dto;
+package egcom.yafi.dto;
 
 public class TopicDTO {
     public String name;

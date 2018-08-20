@@ -1,9 +1,9 @@
-package egcom.yaf.test;
+package egcom.yafi.test;
 
-import egcom.yaf.entity.User;
-import egcom.yaf.packy.Application;
-import egcom.yaf.packy.MainConfiguration;
-import egcom.yaf.repo.UserRepo;
+import egcom.yafi.entity.User;
+import egcom.yafi.packy.Application;
+import egcom.yafi.packy.MainConfiguration;
+import egcom.yafi.repo.UserRepo;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@ContextConfiguration(classes = TestConfig2.class)
+@ContextConfiguration(classes = egcom.yaf.test.TestConfig2.class)
 //@SpringBootTest(classes = {Application.class, MainConfiguration.class, UserRepo.class})
 public class Testy2 {
 

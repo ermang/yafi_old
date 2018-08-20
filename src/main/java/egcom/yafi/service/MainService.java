@@ -1,14 +1,14 @@
-package egcom.yaf.service;
+package egcom.yafi.service;
 
-import egcom.yaf.dto.ThreadDTO;
-import egcom.yaf.dto.TopicDTO;
-import egcom.yaf.dto.UserDTO;
-import egcom.yaf.entity.Thread;
-import egcom.yaf.entity.Topic;
-import egcom.yaf.entity.User;
-import egcom.yaf.repo.ThreadRepo;
-import egcom.yaf.repo.TopicRepo;
-import egcom.yaf.repo.UserRepo;
+import egcom.yafi.dto.ThreadDTO;
+import egcom.yafi.dto.TopicDTO;
+import egcom.yafi.dto.UserDTO;
+import egcom.yafi.entity.Thread;
+import egcom.yafi.entity.Topic;
+import egcom.yafi.entity.User;
+import egcom.yafi.repo.ThreadRepo;
+import egcom.yafi.repo.TopicRepo;
+import egcom.yafi.repo.UserRepo;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

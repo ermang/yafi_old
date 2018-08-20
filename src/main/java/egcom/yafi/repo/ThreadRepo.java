@@ -1,6 +1,6 @@
-package egcom.yaf.repo;
+package egcom.yafi.repo;
 
-import egcom.yaf.entity.Thread;
+import egcom.yafi.entity.Thread;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

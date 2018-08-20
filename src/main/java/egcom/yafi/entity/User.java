@@ -1,9 +1,6 @@
-package egcom.yaf.entity;
+package egcom.yafi.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -13,6 +10,7 @@ public class User {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String username;
 
     private LocalDateTime createdOn;

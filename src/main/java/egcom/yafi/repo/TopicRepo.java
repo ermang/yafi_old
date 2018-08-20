@@ -1,6 +1,6 @@
-package egcom.yaf.repo;
+package egcom.yafi.repo;
 
-import egcom.yaf.entity.Topic;
+import egcom.yafi.entity.Topic;
 import org.springframework.data.repository.CrudRepository;
 
 public interface TopicRepo extends CrudRepository<Topic, Long> {

@@ -1,9 +1,9 @@
-package egcom.yaf.packy;
+package egcom.yafi.packy;
 
-import egcom.yaf.dto.ThreadDTO;
-import egcom.yaf.dto.TopicDTO;
-import egcom.yaf.dto.UserDTO;
-import egcom.yaf.service.MainService;
+import egcom.yafi.dto.ThreadDTO;
+import egcom.yafi.dto.TopicDTO;
+import egcom.yafi.dto.UserDTO;
+import egcom.yafi.service.MainService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,7 +12,6 @@ import java.util.List;
 public class MainController {
 
     private final MainService mainService;
-
 
     public MainController(MainService mainService) {
         this.mainService = mainService;
