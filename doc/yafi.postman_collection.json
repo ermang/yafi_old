@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "28159744-f5a2-474b-98ad-3981d09dbcef",
-		"name": "yaf",
+		"name": "yafi",
 		"description": "yet another forum",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -18,7 +18,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"name\":\"topic1\",\n\t\"username\": \"username1\"\n}"
+					"raw": "{\n\t\"name\":\"topic1\",\n\t\"createdBy\": \"username1\"\n}"
 				},
 				"url": {
 					"raw": "127.0.0.1:8080/topic",
@@ -114,6 +114,28 @@
 					"path": [
 						"topic",
 						"topic1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read_topics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "127.0.0.1:8080/topics",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"topics"
 					]
 				}
 			},
