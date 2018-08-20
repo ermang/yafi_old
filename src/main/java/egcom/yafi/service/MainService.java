@@ -32,7 +32,7 @@ public class MainService {
     public Long createTopic(TopicDTO topicDTO) {
         Topic topic = new Topic();
         topic.setName(topicDTO.name);
-        User user = userRepo.findByUsername(topicDTO.username);
+        User user = userRepo.findByUsername(topicDTO.createdBy);
         topic.setUser(user);
         topic.setCreatedOn(LocalDateTime.now());
         topic = topicRepo.save(topic);
@@ -73,5 +73,19 @@ public class MainService {
         }
 
         return threadDTOs;
+    }
+
+    public List<TopicDTO> readTopics() {
+        List<Topic> topics = topicRepo.findAll();
+
+        ArrayList<TopicDTO> topicDTOs = new ArrayList<>();
+        for (Topic t: topics) {
+            TopicDTO topicDTO = new TopicDTO();
+            topicDTO.name = t.getName();
+            topicDTO.createdBy = t.getUser().getUsername();
+            topicDTOs.add(topicDTO);
+        }
+
+        return topicDTOs;
     }
 }

@@ -49,4 +49,11 @@ public class MainController {
 
         return threadDTOs;
     }
+
+    @GetMapping("/topics")
+    public List<TopicDTO> readTopics() {
+        List<TopicDTO> topicDTOs = mainService.readTopics();
+
+        return topicDTOs;
+    }
 }
