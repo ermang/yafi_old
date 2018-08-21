@@ -51,11 +51,11 @@ public class MainService {
 
     public Long createThread(ThreadDTO threadDTO) {
         User user = userRepo.findByUsername(threadDTO.username);
-        Optional<Topic> topic = topicRepo.findById(threadDTO.topicId);
+        Optional<Topic> topic = topicRepo.findByName(threadDTO.topicName);
         Thread thread = new Thread();
         thread.setContent(threadDTO.content);
         thread.setUser(user);
-        thread.setTopic(topic.get());
+        thread.setTopic(topic.orElseThrow( () -> new RuntimeException("Topic with name " + threadDTO.topicName + " does not exist")));
         thread = threadRepo.save(thread);
 
         return thread.getId();
