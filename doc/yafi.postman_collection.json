@@ -78,7 +78,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"content\": \"content1\",\n\t\"topicId\": 2,\n\t\"username\": \"username1\"\n}"
+					"raw": "{\n\t\"content\": \"content1\",\n\t\"topicName\": \"topic1\",\n\t\"username\": \"username1\"\n}"
 				},
 				"url": {
 					"raw": "127.0.0.1:8080/thread",
