@@ -69,6 +69,7 @@ public class MainService {
             ThreadDTO threadDTO = new ThreadDTO();
             threadDTO.content = t.getContent();
             threadDTO.username = t.getUser().getUsername();
+            threadDTO.topicName = t.getTopic().getName();
             threadDTOs.add(threadDTO);
         }
 
