@@ -1,12 +1,17 @@
 package egcom.yafi.packy;
 
+import egcom.yafi.dto.CreateTopicDTO;
 import egcom.yafi.dto.ThreadDTO;
 import egcom.yafi.dto.TopicDTO;
 import egcom.yafi.dto.UserDTO;
 import egcom.yafi.dto.validator.ThreadDTOValidator;
-import egcom.yafi.dto.validator.TopicDTOValidator;
+import egcom.yafi.dto.validator.CreateTopicDTOValidator;
 import egcom.yafi.dto.validator.UserDTOValidator;
 import egcom.yafi.service.MainService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,14 +22,14 @@ public class MainController {
 
     private final MainService mainService;
     private final UserDTOValidator userDTOValidator;
-    private final TopicDTOValidator topicDTOValidator;
+    private final CreateTopicDTOValidator createTopicDTOValidator;
     private final ThreadDTOValidator threadDTOValidator;
 
-    public MainController(MainService mainService, UserDTOValidator userDTOValidator, TopicDTOValidator topicDTOValidator,
+    public MainController(MainService mainService, UserDTOValidator userDTOValidator, CreateTopicDTOValidator createTopicDTOValidator,
                           ThreadDTOValidator threadDTOValidator) {
         this.mainService = mainService;
         this.userDTOValidator = userDTOValidator;
-        this.topicDTOValidator = topicDTOValidator;
+        this.createTopicDTOValidator = createTopicDTOValidator;
         this.threadDTOValidator = threadDTOValidator;
     }
 
@@ -34,15 +39,18 @@ public class MainController {
     }
 
     @PostMapping("/topic")
-    public Long createTopic(@RequestBody TopicDTO topicDTO) {
-        topicDTOValidator.validate(topicDTO);
-        Long result = mainService.createTopic(topicDTO);
+    public Long createTopic(@RequestBody CreateTopicDTO createTopicDTO) {
+        createTopicDTOValidator.validate(createTopicDTO);
+        Long result = mainService.createTopic(createTopicDTO);
 
         return result;
     }
 
     @PostMapping("/user")
-    public Long createUser(@RequestBody UserDTO userDTO) {
+    public Long createUser(@RequestBody UserDTO userDTO , Authentication authentication, @AuthenticationPrincipal User activeUser) {
+
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        System.out.println("User has authorities: " + userDetails.getAuthorities());
         userDTOValidator.validate(userDTO);
         Long result = mainService.createUser(userDTO);
 

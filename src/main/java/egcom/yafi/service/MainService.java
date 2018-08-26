@@ -1,11 +1,13 @@
 package egcom.yafi.service;
 
+import egcom.yafi.dto.CreateTopicDTO;
 import egcom.yafi.dto.ThreadDTO;
 import egcom.yafi.dto.TopicDTO;
 import egcom.yafi.dto.UserDTO;
 import egcom.yafi.entity.Thread;
 import egcom.yafi.entity.Topic;
 import egcom.yafi.entity.User;
+import egcom.yafi.packy.ActiveUserResolver;
 import egcom.yafi.packy.Role;
 import egcom.yafi.repo.ThreadRepo;
 import egcom.yafi.repo.TopicRepo;
@@ -24,17 +26,19 @@ public class MainService {
     private final TopicRepo topicRepo;
     private final UserRepo userRepo;
     private final ThreadRepo threadRepo;
+    private final ActiveUserResolver activeUserResolver;
 
-    public MainService(TopicRepo topicRepo, UserRepo userRepo, ThreadRepo threadRepo) {
+    public MainService(TopicRepo topicRepo, UserRepo userRepo, ThreadRepo threadRepo, ActiveUserResolver activeUserResolver) {
         this.topicRepo = topicRepo;
         this.userRepo = userRepo;
         this.threadRepo = threadRepo;
+        this.activeUserResolver = activeUserResolver;
     }
 
-    public Long createTopic(TopicDTO topicDTO) {
+    public Long createTopic(CreateTopicDTO createTopicDTO) {
         Topic topic = new Topic();
-        topic.setName(topicDTO.name);
-        User user = userRepo.findByUsername(topicDTO.createdBy);
+        topic.setName(createTopicDTO.name);
+        User user = userRepo.findByUsername(activeUserResolver.getActiveUser().getUsername());
         topic.setUser(user);
         topic.setCreatedOn(LocalDateTime.now());
         topic = topicRepo.save(topic);
