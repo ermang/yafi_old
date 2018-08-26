@@ -1,9 +1,6 @@
 package egcom.yafi.test;
 
-import egcom.yafi.dto.CreateTopicDTO;
-import egcom.yafi.dto.ThreadDTO;
-import egcom.yafi.dto.TopicDTO;
-import egcom.yafi.dto.UserDTO;
+import egcom.yafi.dto.*;
 import egcom.yafi.packy.ActiveUserResolver;
 import egcom.yafi.service.MainService;
 import org.junit.Assert;
@@ -79,12 +76,11 @@ public class MainServiceTest {
         CreateTopicDTO topicDTO = testFactory.createTopicDTO();
         service.createTopic(topicDTO);
 
-        ThreadDTO threadDTO = new ThreadDTO();
-        threadDTO.content = "this da content";
-        threadDTO.username = "root";
-        threadDTO.topicName = "topic1";
+        CreateThreadDTO createThreadDTO = new CreateThreadDTO();
+        createThreadDTO.content = "this da content";
+        createThreadDTO.topicName = "topic1";
 
-        Long result =service.createThread(threadDTO);
+        Long result =service.createThread(createThreadDTO);
 
         Assert.assertNotNull(result);
     }

@@ -1,9 +1,6 @@
 package egcom.yafi.service;
 
-import egcom.yafi.dto.CreateTopicDTO;
-import egcom.yafi.dto.ThreadDTO;
-import egcom.yafi.dto.TopicDTO;
-import egcom.yafi.dto.UserDTO;
+import egcom.yafi.dto.*;
 import egcom.yafi.entity.Thread;
 import egcom.yafi.entity.Topic;
 import egcom.yafi.entity.User;
@@ -60,13 +57,13 @@ public class MainService {
         return user.getId();
     }
 
-    public Long createThread(ThreadDTO threadDTO) {
-        User user = userRepo.findByUsername(threadDTO.username);
-        Optional<Topic> topic = topicRepo.findByName(threadDTO.topicName);
+    public Long createThread(CreateThreadDTO createThreadDTO) {
+        User user = userRepo.findByUsername(activeUserResolver.getActiveUser().getUsername());
+        Optional<Topic> topic = topicRepo.findByName(createThreadDTO.topicName);
         Thread thread = new Thread();
-        thread.setContent(threadDTO.content);
+        thread.setContent(createThreadDTO.content);
         thread.setUser(user);
-        thread.setTopic(topic.orElseThrow( () -> new RuntimeException("Topic with name " + threadDTO.topicName + " does not exist")));
+        thread.setTopic(topic.orElseThrow( () -> new RuntimeException("Topic with name " + createThreadDTO.topicName + " does not exist")));
         thread = threadRepo.save(thread);
 
         return thread.getId();

@@ -1,10 +1,7 @@
 package egcom.yafi.packy;
 
-import egcom.yafi.dto.CreateTopicDTO;
-import egcom.yafi.dto.ThreadDTO;
-import egcom.yafi.dto.TopicDTO;
-import egcom.yafi.dto.UserDTO;
-import egcom.yafi.dto.validator.ThreadDTOValidator;
+import egcom.yafi.dto.*;
+import egcom.yafi.dto.validator.CreateThreadDTOValidator;
 import egcom.yafi.dto.validator.CreateTopicDTOValidator;
 import egcom.yafi.dto.validator.UserDTOValidator;
 import egcom.yafi.service.MainService;
@@ -23,14 +20,14 @@ public class MainController {
     private final MainService mainService;
     private final UserDTOValidator userDTOValidator;
     private final CreateTopicDTOValidator createTopicDTOValidator;
-    private final ThreadDTOValidator threadDTOValidator;
+    private final CreateThreadDTOValidator createThreadDTOValidator;
 
     public MainController(MainService mainService, UserDTOValidator userDTOValidator, CreateTopicDTOValidator createTopicDTOValidator,
-                          ThreadDTOValidator threadDTOValidator) {
+                          CreateThreadDTOValidator createThreadDTOValidator) {
         this.mainService = mainService;
         this.userDTOValidator = userDTOValidator;
         this.createTopicDTOValidator = createTopicDTOValidator;
-        this.threadDTOValidator = threadDTOValidator;
+        this.createThreadDTOValidator = createThreadDTOValidator;
     }
 
     @RequestMapping("/")
@@ -58,9 +55,9 @@ public class MainController {
     }
 
     @PostMapping("/thread")
-    public Long createThread(@RequestBody ThreadDTO threadDTO) {
-        threadDTOValidator.validate(threadDTO);
-        Long result = mainService.createThread(threadDTO);
+    public Long createThread(@RequestBody CreateThreadDTO createThreadDTO) {
+        createThreadDTOValidator.validate(createThreadDTO);
+        Long result = mainService.createThread(createThreadDTO);
 
         return result;
     }
