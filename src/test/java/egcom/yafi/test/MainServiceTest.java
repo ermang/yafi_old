@@ -56,7 +56,7 @@ public class MainServiceTest {
         TopicDTO topicDTO = testFactory.topicDTO();
 
         TopicDTO topicDTO2 = new TopicDTO();
-        topicDTO2.createdBy = "osman";
+        topicDTO2.createdBy = "root";
         topicDTO2.name = "topic2";
 
         service.createTopic(topicDTO);
@@ -77,7 +77,7 @@ public class MainServiceTest {
 
         ThreadDTO threadDTO = new ThreadDTO();
         threadDTO.content = "this da content";
-        threadDTO.username = "osman";
+        threadDTO.username = "root";
         threadDTO.topicName = "topic1";
 
         Long result =service.createThread(threadDTO);

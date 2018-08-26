@@ -7,7 +7,8 @@ public class TestFactory {
 
     public UserDTO userDTO() {
         UserDTO userDTO = new UserDTO();
-        userDTO.username = "osman";
+        userDTO.username = "root";
+        userDTO.password = "root";
 
         return userDTO;
     }
@@ -15,7 +16,7 @@ public class TestFactory {
     public TopicDTO topicDTO() {
         TopicDTO topicDTO = new TopicDTO();
         topicDTO.name = "topic1";
-        topicDTO.createdBy = "osman";
+        topicDTO.createdBy = "root";
 
         return topicDTO;
     }

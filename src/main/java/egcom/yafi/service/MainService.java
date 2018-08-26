@@ -6,9 +6,11 @@ import egcom.yafi.dto.UserDTO;
 import egcom.yafi.entity.Thread;
 import egcom.yafi.entity.Topic;
 import egcom.yafi.entity.User;
+import egcom.yafi.packy.Role;
 import egcom.yafi.repo.ThreadRepo;
 import egcom.yafi.repo.TopicRepo;
 import egcom.yafi.repo.UserRepo;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -43,6 +45,11 @@ public class MainService {
     public Long createUser(UserDTO userDTO) {
         User user = new User();
         user.setUsername(userDTO.username);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(userDTO.password);
+        user.setPassword(encodedPassword);
+        user.setEnabled(true);
+        user.setRole(Role.USER.getValue());
         user.setCreatedOn(LocalDateTime.now());
         user = userRepo.save(user);
 

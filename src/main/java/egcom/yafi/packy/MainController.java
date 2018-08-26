@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin //TODO: FIXME
 public class MainController {
 
     private final MainService mainService;
@@ -29,7 +30,7 @@ public class MainController {
 
     @RequestMapping("/")
     public String greeting() {
-        return "Welcome to YAF";
+        return "Welcome to YAFI";
     }
 
     @PostMapping("/topic")

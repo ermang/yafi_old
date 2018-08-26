@@ -15,6 +15,14 @@ public class User {
     @Column(unique = true)
     private String username;
 
+    @NotBlank
+    @Column(nullable = false)
+    private String password;
+
+    private String role;
+
+    private boolean enabled;
+
     private LocalDateTime createdOn;
 
     public Long getId() {
@@ -33,27 +41,35 @@ public class User {
         this.username = username;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public LocalDateTime getCreatedOn() {
         return createdOn;
     }
 
     public void setCreatedOn(LocalDateTime createdOn) {
         this.createdOn = createdOn;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) &&
-                Objects.equals(username, user.username) &&
-                Objects.equals(createdOn, user.createdOn);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(id, username, createdOn);
     }
 }
