@@ -9,6 +9,21 @@
 		{
 			"name": "create_topic",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "user",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -18,7 +33,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"name\":\"topic1\",\n\t\"createdBy\": \"username1\"\n}"
+					"raw": "{\n\t\"name\":\"topic1\"\n}"
 				},
 				"url": {
 					"raw": "127.0.0.1:8080/topic",
@@ -39,6 +54,9 @@
 		{
 			"name": "create_user",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -48,7 +66,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"username\": \"username1\"\n}"
+					"raw": "{\n\t\"username\": \"user\",\n\t\"password\": \"user\"\n}"
 				},
 				"url": {
 					"raw": "127.0.0.1:8080/user",
@@ -78,7 +96,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"content\": \"content1\",\n\t\"topicName\": \"topic1\",\n\t\"username\": \"username1\"\n}"
+					"raw": "{\n\t\"content\": \"content1\",\n\t\"topicName\": \"topic1\"\n}"
 				},
 				"url": {
 					"raw": "127.0.0.1:8080/thread",
