@@ -1,17 +1,16 @@
 package egcom.yafi.test;
 
 import egcom.yafi.dto.CreateTopicDTO;
-import egcom.yafi.dto.TopicDTO;
-import egcom.yafi.dto.UserDTO;
+import egcom.yafi.dto.CreateUserDTO;
 
 public class TestFactory {
 
-    public UserDTO userDTO() {
-        UserDTO userDTO = new UserDTO();
-        userDTO.username = "user";
-        userDTO.password = "password";
+    public CreateUserDTO createUserDTO() {
+        CreateUserDTO createUserDTO = new CreateUserDTO();
+        createUserDTO.username = "user";
+        createUserDTO.password = "password";
 
-        return userDTO;
+        return createUserDTO;
     }
 
     public CreateTopicDTO createTopicDTO() {

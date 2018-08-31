@@ -43,11 +43,11 @@ public class MainService {
         return topic.getId();
     }
 
-    public Long createUser(UserDTO userDTO) {
+    public Long createUser(CreateUserDTO createUserDTO) {
         User user = new User();
-        user.setUsername(userDTO.username);
+        user.setUsername(createUserDTO.username);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(userDTO.password);
+        String encodedPassword = passwordEncoder.encode(createUserDTO.password);
         user.setPassword(encodedPassword);
         user.setEnabled(true);
         user.setRole(Role.USER.getValue());

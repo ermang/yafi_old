@@ -1,7 +1,6 @@
 package egcom.yafi.test;
 
 import egcom.yafi.dto.*;
-import egcom.yafi.packy.ActiveUserResolver;
 import egcom.yafi.service.MainService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -32,7 +30,7 @@ public class MainServiceTest {
 
     @Test
     public void create_user()  {
-        UserDTO userDTO = testFactory.userDTO();
+        CreateUserDTO userDTO = testFactory.createUserDTO();
         Long result = service.createUser(userDTO);
 
         Assert.assertNotNull(result);
@@ -40,7 +38,7 @@ public class MainServiceTest {
 
     @Test
     public void create_user_and_topic() {
-        UserDTO userDTO = testFactory.userDTO();
+        CreateUserDTO userDTO = testFactory.createUserDTO();
         service.createUser(userDTO);
 
         CreateTopicDTO topicDTO = testFactory.createTopicDTO();
@@ -51,7 +49,7 @@ public class MainServiceTest {
 
     @Test
     public void create_user_and_topic_read_topics() {
-        UserDTO userDTO = testFactory.userDTO();
+        CreateUserDTO userDTO = testFactory.createUserDTO();
         service.createUser(userDTO);
 
         CreateTopicDTO topicDTO = testFactory.createTopicDTO();
@@ -70,7 +68,7 @@ public class MainServiceTest {
 
     @Test
     public void create_user_and_topic_and_thread() {
-        UserDTO userDTO = testFactory.userDTO();
+        CreateUserDTO userDTO = testFactory.createUserDTO();
         service.createUser(userDTO);
 
         CreateTopicDTO topicDTO = testFactory.createTopicDTO();
