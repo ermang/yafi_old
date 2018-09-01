@@ -158,6 +158,29 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "like_thread",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "127.0.0.1:8080/likethread/3",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"likethread",
+						"3"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
