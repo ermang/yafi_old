@@ -24,6 +24,9 @@ public class Thread {
     @JoinColumn(name = "topic_id")
     private Topic topic;
 
+    @NotNull
+    private Long likeCount;
+
     private LocalDateTime createdOn;
 
     public Long getId() {
@@ -56,6 +59,14 @@ public class Thread {
 
     public void setTopic(Topic topic) {
         this.topic = topic;
+    }
+
+    public Long getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(Long likeCount) {
+        this.likeCount = likeCount;
     }
 
     public LocalDateTime getCreatedOn() {

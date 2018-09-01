@@ -4,4 +4,5 @@ public class ThreadDTO {
     public String content;
     public String topicName;
     public String username;
+    public Long likeCount;
 }

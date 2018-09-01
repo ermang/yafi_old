@@ -18,7 +18,8 @@ public class MainController {
     private final CreateTopicDTOValidator createTopicDTOValidator;
     private final CreateThreadDTOValidator createThreadDTOValidator;
 
-    public MainController(MainService mainService, CreateUserDTOValidator createUserDTOValidator, CreateTopicDTOValidator createTopicDTOValidator,
+    public MainController(MainService mainService, CreateUserDTOValidator createUserDTOValidator,
+                          CreateTopicDTOValidator createTopicDTOValidator,
                           CreateThreadDTOValidator createThreadDTOValidator) {
         this.mainService = mainService;
         this.createUserDTOValidator = createUserDTOValidator;
@@ -51,6 +52,13 @@ public class MainController {
     public Long createThread(@RequestBody CreateThreadDTO createThreadDTO) {
         createThreadDTOValidator.validate(createThreadDTO);
         Long result = mainService.createThread(createThreadDTO);
+
+        return result;
+    }
+
+    @PostMapping("/likethread/{threadId}")
+    public Long likeThread(@PathVariable Long threadId) {
+        Long result = mainService.likeThread(threadId);
 
         return result;
     }

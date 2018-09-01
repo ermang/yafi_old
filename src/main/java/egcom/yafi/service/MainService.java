@@ -64,6 +64,7 @@ public class MainService {
         thread.setContent(createThreadDTO.content);
         thread.setUser(user);
         thread.setTopic(topic.orElseThrow( () -> new RuntimeException("Topic with name " + createThreadDTO.topicName + " does not exist")));
+        thread.setLikeCount(0L);
         thread = threadRepo.save(thread);
 
         return thread.getId();
@@ -78,6 +79,7 @@ public class MainService {
             threadDTO.content = t.getContent();
             threadDTO.username = t.getUser().getUsername();
             threadDTO.topicName = t.getTopic().getName();
+            threadDTO.likeCount = t.getLikeCount();
             threadDTOs.add(threadDTO);
         }
 
@@ -96,5 +98,19 @@ public class MainService {
         }
 
         return topicDTOs;
+    }
+
+    public long likeThread(Long threadId) {
+        Optional<Thread> thread = threadRepo.findById(threadId);
+
+        if (!thread.isPresent())
+            throw new RuntimeException("Thread with id " + threadId + " doesn not exist");
+        else {
+            Thread t = thread.get();
+            t.setLikeCount(t.getLikeCount() + 1);
+            threadRepo.save(t);
+
+            return t.getLikeCount();
+        }
     }
 }

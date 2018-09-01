@@ -83,4 +83,23 @@ public class MainServiceTest {
         Assert.assertNotNull(result);
     }
 
+    @Test
+    public void create_user_and_topic_and_thread_and_like() {
+        CreateUserDTO userDTO = testFactory.createUserDTO();
+        service.createUser(userDTO);
+
+        CreateTopicDTO topicDTO = testFactory.createTopicDTO();
+        service.createTopic(topicDTO);
+
+        CreateThreadDTO createThreadDTO = new CreateThreadDTO();
+        createThreadDTO.content = "this da content";
+        createThreadDTO.topicName = "topic1";
+
+        Long threadId =service.createThread(createThreadDTO);
+
+        long actual = service.likeThread(threadId);
+
+        Assert.assertEquals(1, actual);
+    }
+
 }
