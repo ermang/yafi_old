@@ -226,7 +226,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "127.0.0.1:8080/thread/user",
+					"raw": "127.0.0.1:8080/thread/user?page=0",
 					"host": [
 						"127",
 						"0",
@@ -237,6 +237,12 @@
 					"path": [
 						"thread",
 						"user"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						}
 					]
 				}
 			},
