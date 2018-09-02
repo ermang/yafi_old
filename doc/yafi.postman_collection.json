@@ -218,6 +218,29 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "read_threads_from_user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "127.0.0.1:8080/thread/user",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"thread",
+						"user"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
