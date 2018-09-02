@@ -5,6 +5,7 @@ import egcom.yafi.dto.validator.CreateThreadDTOValidator;
 import egcom.yafi.dto.validator.CreateTopicDTOValidator;
 import egcom.yafi.dto.validator.CreateUserDTOValidator;
 import egcom.yafi.service.MainService;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -76,8 +77,8 @@ public class MainController {
     }
 
     @GetMapping("/thread/{username}")
-    public List<ThreadDTO> readThreadsFromUser(@PathVariable String username) {
-        List<ThreadDTO> threadDTOs = mainService.readThreadsFromUser(username);
+    public List<ThreadDTO> readThreadsFromUser(@PathVariable String username, @RequestParam("page") int page) {
+        List<ThreadDTO> threadDTOs = mainService.readThreadsFromUser(username, PageRequest.of(page, 20));
 
         return threadDTOs;
     }

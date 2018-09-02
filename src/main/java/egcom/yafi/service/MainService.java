@@ -9,6 +9,7 @@ import egcom.yafi.packy.Role;
 import egcom.yafi.repo.ThreadRepo;
 import egcom.yafi.repo.TopicRepo;
 import egcom.yafi.repo.UserRepo;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -89,8 +90,8 @@ public class MainService {
         return threadDTOs;
     }
 
-    public List<ThreadDTO> readThreadsFromUser(String username) {
-        List<Thread> threads = threadRepo.findAllByUserUsernameOrderByCreatedOnAsc(username);
+    public List<ThreadDTO> readThreadsFromUser(String username, PageRequest pageRequest) {
+        List<Thread> threads = threadRepo.findAllByUserUsernameOrderByCreatedOnAsc(username, pageRequest);
 
         ArrayList<ThreadDTO> threadDTOs = new ArrayList<>();
         for (Thread t: threads) {
