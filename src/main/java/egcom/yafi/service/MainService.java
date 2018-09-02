@@ -90,7 +90,7 @@ public class MainService {
     }
 
     public List<ThreadDTO> readThreadsFromUser(String username) {
-        List<Thread> threads = threadRepo.findAllByUserUsernameOrderByCreatedOnDesc(username);
+        List<Thread> threads = threadRepo.findAllByUserUsernameOrderByCreatedOnAsc(username);
 
         ArrayList<ThreadDTO> threadDTOs = new ArrayList<>();
         for (Thread t: threads) {
