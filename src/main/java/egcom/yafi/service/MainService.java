@@ -76,6 +76,7 @@ public class MainService {
         ArrayList<ThreadDTO> threadDTOs = new ArrayList<>();
         for (Thread t: threads) {
             ThreadDTO threadDTO = new ThreadDTO();
+            threadDTO.id = t.getId();
             threadDTO.content = t.getContent();
             threadDTO.username = t.getUser().getUsername();
             threadDTO.topicName = t.getTopic().getName();
