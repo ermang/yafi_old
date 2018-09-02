@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ThreadRepo extends CrudRepository<Thread, Long> {
 
-    List<Thread> findAllByTopicName(String name);
+    List<Thread> findAllByTopicNameOrderByCreatedOnDesc(String name);
 }

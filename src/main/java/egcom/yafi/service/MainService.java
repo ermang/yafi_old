@@ -65,13 +65,14 @@ public class MainService {
         thread.setUser(user);
         thread.setTopic(topic.orElseThrow( () -> new RuntimeException("Topic with name " + createThreadDTO.topicName + " does not exist")));
         thread.setLikeCount(0L);
+        thread.setCreatedOn(LocalDateTime.now());
         thread = threadRepo.save(thread);
 
         return thread.getId();
     }
 
     public List<ThreadDTO> readThreadsFromTopic(String topicName) {
-        List<Thread> threads = threadRepo.findAllByTopicName(topicName);
+        List<Thread> threads = threadRepo.findAllByTopicNameOrderByCreatedOnDesc(topicName);
 
         ArrayList<ThreadDTO> threadDTOs = new ArrayList<>();
         for (Thread t: threads) {
@@ -81,6 +82,7 @@ public class MainService {
             threadDTO.username = t.getUser().getUsername();
             threadDTO.topicName = t.getTopic().getName();
             threadDTO.likeCount = t.getLikeCount();
+            threadDTO.createdOn = t.getCreatedOn();
             threadDTOs.add(threadDTO);
         }
 
