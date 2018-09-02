@@ -32,6 +32,11 @@ public class MainController {
         return "Welcome to YAFI";
     }
 
+    @PostMapping("/login")
+    public boolean login() {
+        return true;
+    }
+
     @PostMapping("/topic")
     public Long createTopic(@RequestBody CreateTopicDTO createTopicDTO) {
         createTopicDTOValidator.validate(createTopicDTO);
