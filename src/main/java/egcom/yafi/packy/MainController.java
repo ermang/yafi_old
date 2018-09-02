@@ -75,6 +75,13 @@ public class MainController {
         return threadDTOs;
     }
 
+    @GetMapping("/thread/{username}")
+    public List<ThreadDTO> readThreadsFromUser(@PathVariable String username) {
+        List<ThreadDTO> threadDTOs = mainService.readThreadsFromUser(username);
+
+        return threadDTOs;
+    }
+
     @GetMapping("/topics")
     public List<TopicDTO> readTopics() {
         List<TopicDTO> topicDTOs = mainService.readTopics();
