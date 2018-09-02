@@ -9,6 +9,7 @@ import egcom.yafi.packy.Role;
 import egcom.yafi.repo.ThreadRepo;
 import egcom.yafi.repo.TopicRepo;
 import egcom.yafi.repo.UserRepo;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -90,8 +91,8 @@ public class MainService {
         return threadDTOs;
     }
 
-    public List<ThreadDTO> readThreadsFromUser(String username, PageRequest pageRequest) {
-        List<Thread> threads = threadRepo.findAllByUserUsernameOrderByCreatedOnAsc(username, pageRequest);
+    public ThreadPageDTO readThreadsFromUser(String username, PageRequest pageRequest) {
+        Page<Thread> threads = threadRepo.findAllByUserUsernameOrderByCreatedOnAsc(username, pageRequest);
 
         ArrayList<ThreadDTO> threadDTOs = new ArrayList<>();
         for (Thread t: threads) {
@@ -105,7 +106,11 @@ public class MainService {
             threadDTOs.add(threadDTO);
         }
 
-        return threadDTOs;
+        ThreadPageDTO threadPageDTO = new ThreadPageDTO();
+        threadPageDTO.threadDTOs = threadDTOs;
+        threadPageDTO.totalPageCount = threads.getTotalPages();
+
+        return threadPageDTO;
     }
 
     public List<TopicDTO> readTopics() {

@@ -77,10 +77,10 @@ public class MainController {
     }
 
     @GetMapping("/thread/{username}")
-    public List<ThreadDTO> readThreadsFromUser(@PathVariable String username, @RequestParam("page") int page) {
-        List<ThreadDTO> threadDTOs = mainService.readThreadsFromUser(username, PageRequest.of(page, 20));
+    public ThreadPageDTO readThreadsFromUser(@PathVariable String username, @RequestParam("page") int page) {
+        ThreadPageDTO threadPageDTO= mainService.readThreadsFromUser(username, PageRequest.of(page, 2));
 
-        return threadDTOs;
+        return threadPageDTO;
     }
 
     @GetMapping("/topics")
