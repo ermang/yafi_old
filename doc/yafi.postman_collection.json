@@ -121,7 +121,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "127.0.0.1:8080/topic/topic1",
+					"raw": "127.0.0.1:8080/topic/topic1?page=0",
 					"host": [
 						"127",
 						"0",
@@ -132,6 +132,12 @@
 					"path": [
 						"topic",
 						"topic1"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						}
 					]
 				}
 			},
