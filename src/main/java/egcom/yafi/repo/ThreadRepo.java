@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ThreadRepo extends PagingAndSortingRepository<Thread, Long> {
 
-    List<Thread> findAllByTopicNameOrderByCreatedOnDesc(String name);
+    Page<Thread> findAllByTopicNameOrderByCreatedOnAsc(String name, Pageable pageable);
 
     Page<Thread> findAllByUserUsernameOrderByCreatedOnAsc(String username, Pageable pageable);
 }

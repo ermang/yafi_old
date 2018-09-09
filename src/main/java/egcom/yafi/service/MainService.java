@@ -73,8 +73,8 @@ public class MainService {
         return thread.getId();
     }
 
-    public List<ThreadDTO> readThreadsFromTopic(String topicName) {
-        List<Thread> threads = threadRepo.findAllByTopicNameOrderByCreatedOnDesc(topicName);
+    public ThreadPageDTO readThreadsFromTopic(String topicName, PageRequest pageRequest) {
+        Page<Thread> threads = threadRepo.findAllByTopicNameOrderByCreatedOnAsc(topicName, pageRequest);
 
         ArrayList<ThreadDTO> threadDTOs = new ArrayList<>();
         for (Thread t: threads) {
@@ -88,7 +88,11 @@ public class MainService {
             threadDTOs.add(threadDTO);
         }
 
-        return threadDTOs;
+        ThreadPageDTO threadPageDTO = new ThreadPageDTO();
+        threadPageDTO.threadDTOs = threadDTOs;
+        threadPageDTO.totalPageCount = threads.getTotalPages();
+
+        return threadPageDTO;
     }
 
     public ThreadPageDTO readThreadsFromUser(String username, PageRequest pageRequest) {
