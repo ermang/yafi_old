@@ -144,4 +144,18 @@ public class MainService {
             return t.getLikeCount();
         }
     }
+
+    public List<TopicDTO> readMostRecentlyUpdatedTopics() {
+        List<Topic> topics = topicRepo.readMostRecentlyUpdatedTopics();
+
+        ArrayList<TopicDTO> topicDTOs = new ArrayList<>();
+        for (Topic t: topics) {
+            TopicDTO topicDTO = new TopicDTO();
+            topicDTO.name = t.getName();
+            topicDTO.createdBy = t.getUser().getUsername();
+            topicDTOs.add(topicDTO);
+        }
+
+        return topicDTOs;
+    }
 }

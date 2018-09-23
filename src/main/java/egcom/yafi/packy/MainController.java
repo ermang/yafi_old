@@ -89,4 +89,11 @@ public class MainController {
 
         return topicDTOs;
     }
+
+    @GetMapping("/topics/recent")
+    public List<TopicDTO> readMostRecentlyUpdatedTopics() {
+        List<TopicDTO> topicDTOs = mainService.readMostRecentlyUpdatedTopics();
+
+        return topicDTOs;
+    }
 }
