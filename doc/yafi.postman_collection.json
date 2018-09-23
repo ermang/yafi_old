@@ -253,6 +253,29 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "read_most_recently_updated_topics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "127.0.0.1:8080/topics/recent",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"topics",
+						"recent"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
