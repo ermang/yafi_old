@@ -158,4 +158,22 @@ public class MainService {
 
         return topicDTOs;
     }
+
+    public List<ThreadDTO> readRecentThreads() {
+        List<Thread> threads = threadRepo.findFirst25ByOrderByCreatedOn_Desc();
+
+        ArrayList<ThreadDTO> threadDTOs = new ArrayList<>();
+        for (Thread t: threads) {
+            ThreadDTO threadDTO = new ThreadDTO();
+            threadDTO.id = t.getId();
+            threadDTO.content = t.getContent();
+            threadDTO.username = t.getUser().getUsername();
+            threadDTO.topicName = t.getTopic().getName();
+            threadDTO.likeCount = t.getLikeCount();
+            threadDTO.createdOn = t.getCreatedOn();
+            threadDTOs.add(threadDTO);
+        }
+
+        return threadDTOs;
+    }
 }

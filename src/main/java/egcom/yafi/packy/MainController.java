@@ -96,4 +96,11 @@ public class MainController {
 
         return topicDTOs;
     }
+
+    @GetMapping("/threads/recent")
+    public List<ThreadDTO> readRecentThreads() {
+        List<ThreadDTO> threadDTOs = mainService.readRecentThreads();
+
+        return  threadDTOs;
+    }
 }
