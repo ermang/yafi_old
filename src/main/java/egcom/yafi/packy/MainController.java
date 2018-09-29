@@ -98,9 +98,9 @@ public class MainController {
     }
 
     @GetMapping("/threads/recent")
-    public List<ThreadDTO> readRecentThreads() {
-        List<ThreadDTO> threadDTOs = mainService.readRecentThreads();
+    public ThreadPageDTO readRecentThreads(@RequestParam("page") int page) {
+        ThreadPageDTO threadPageDTO = mainService.readRecentThreads(PageRequest.of(page, 25));
 
-        return  threadDTOs;
+        return  threadPageDTO;
     }
 }

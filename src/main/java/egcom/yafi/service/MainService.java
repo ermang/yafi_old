@@ -159,8 +159,8 @@ public class MainService {
         return topicDTOs;
     }
 
-    public List<ThreadDTO> readRecentThreads() {
-        List<Thread> threads = threadRepo.findFirst25ByOrderByCreatedOn_Desc();
+    public ThreadPageDTO readRecentThreads(PageRequest pageRequest) {
+        Page<Thread> threads = threadRepo.findFirst25ByOrderByCreatedOn_Desc(pageRequest);
 
         ArrayList<ThreadDTO> threadDTOs = new ArrayList<>();
         for (Thread t: threads) {
@@ -174,6 +174,10 @@ public class MainService {
             threadDTOs.add(threadDTO);
         }
 
-        return threadDTOs;
+        ThreadPageDTO threadPageDTO = new ThreadPageDTO();
+        threadPageDTO.threadDTOs = threadDTOs;
+        threadPageDTO.totalPageCount = threads.getTotalPages();
+
+        return threadPageDTO;
     }
 }

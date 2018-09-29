@@ -17,7 +17,7 @@ public interface ThreadRepo extends PagingAndSortingRepository<Thread, Long> {
     Page<Thread> findAllByUserUsernameOrderByCreatedOnAsc(String username, Pageable pageable);
 
     @EntityGraph(attributePaths = {"user", "topic"} ,type = EntityGraph.EntityGraphType.FETCH) //TODO: LEARN THIS
-    List<Thread> findFirst25ByOrderByCreatedOn_Desc();
+    Page<Thread> findFirst25ByOrderByCreatedOn_Desc(Pageable pageable);
 
     //TopicDTO findAllDistinct
 }
