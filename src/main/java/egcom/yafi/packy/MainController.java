@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin //TODO: FIXME
+//@CrossOrigin(value = "http://localhost:4200" )//TODO: FIXME
 public class MainController {
 
     private final MainService mainService;
