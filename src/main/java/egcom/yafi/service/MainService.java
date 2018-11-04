@@ -3,12 +3,12 @@ package egcom.yafi.service;
 import egcom.yafi.dto.*;
 import egcom.yafi.entity.Thread;
 import egcom.yafi.entity.Topic;
-import egcom.yafi.entity.User;
+import egcom.yafi.entity.YafiUser;
 import egcom.yafi.packy.ActiveUserResolver;
 import egcom.yafi.packy.Role;
 import egcom.yafi.repo.ThreadRepo;
 import egcom.yafi.repo.TopicRepo;
-import egcom.yafi.repo.UserRepo;
+import egcom.yafi.repo.YafiUserRepo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,13 +23,13 @@ import java.util.Optional;
 public class MainService {
 
     private final TopicRepo topicRepo;
-    private final UserRepo userRepo;
+    private final YafiUserRepo yafiUserRepo;
     private final ThreadRepo threadRepo;
     private final ActiveUserResolver activeUserResolver;
 
-    public MainService(TopicRepo topicRepo, UserRepo userRepo, ThreadRepo threadRepo, ActiveUserResolver activeUserResolver) {
+    public MainService(TopicRepo topicRepo, YafiUserRepo yafiUserRepo, ThreadRepo threadRepo, ActiveUserResolver activeUserResolver) {
         this.topicRepo = topicRepo;
-        this.userRepo = userRepo;
+        this.yafiUserRepo = yafiUserRepo;
         this.threadRepo = threadRepo;
         this.activeUserResolver = activeUserResolver;
     }
@@ -37,8 +37,8 @@ public class MainService {
     public Long createTopic(CreateTopicDTO createTopicDTO) {
         Topic topic = new Topic();
         topic.setName(createTopicDTO.name);
-        User user = userRepo.findByUsername(activeUserResolver.getActiveUser().getUsername());
-        topic.setUser(user);
+        YafiUser yafiUser = yafiUserRepo.findByUsername(activeUserResolver.getActiveUser().getUsername());
+        topic.setYafiUser(yafiUser);
         topic.setCreatedOn(LocalDateTime.now());
         topic = topicRepo.save(topic);
 
@@ -46,25 +46,25 @@ public class MainService {
     }
 
     public Long createUser(CreateUserDTO createUserDTO) {
-        User user = new User();
-        user.setUsername(createUserDTO.username);
+        YafiUser yafiUser = new YafiUser();
+        yafiUser.setUsername(createUserDTO.username);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(createUserDTO.password);
-        user.setPassword(encodedPassword);
-        user.setEnabled(true);
-        user.setRole(Role.USER.getValue());
-        user.setCreatedOn(LocalDateTime.now());
-        user = userRepo.save(user);
+        yafiUser.setPassword(encodedPassword);
+        yafiUser.setEnabled(true);
+        yafiUser.setRole(Role.USER.getValue());
+        yafiUser.setCreatedOn(LocalDateTime.now());
+        yafiUser = yafiUserRepo.save(yafiUser);
 
-        return user.getId();
+        return yafiUser.getId();
     }
 
     public Long createThread(CreateThreadDTO createThreadDTO) {
-        User user = userRepo.findByUsername(activeUserResolver.getActiveUser().getUsername());
+        YafiUser yafiUser = yafiUserRepo.findByUsername(activeUserResolver.getActiveUser().getUsername());
         Optional<Topic> topic = topicRepo.findByName(createThreadDTO.topicName);
         Thread thread = new Thread();
         thread.setContent(createThreadDTO.content);
-        thread.setUser(user);
+        thread.setYafiUser(yafiUser);
         thread.setTopic(topic.orElseThrow( () -> new RuntimeException("Topic with name " + createThreadDTO.topicName + " does not exist")));
         thread.setLikeCount(0L);
         thread.setCreatedOn(LocalDateTime.now());
@@ -81,7 +81,7 @@ public class MainService {
             ThreadDTO threadDTO = new ThreadDTO();
             threadDTO.id = t.getId();
             threadDTO.content = t.getContent();
-            threadDTO.username = t.getUser().getUsername();
+            threadDTO.username = t.getYafiUser().getUsername();
             threadDTO.topicName = t.getTopic().getName();
             threadDTO.likeCount = t.getLikeCount();
             threadDTO.createdOn = t.getCreatedOn();
@@ -96,14 +96,14 @@ public class MainService {
     }
 
     public ThreadPageDTO readThreadsFromUser(String username, PageRequest pageRequest) {
-        Page<Thread> threads = threadRepo.findAllByUserUsernameOrderByCreatedOnAsc(username, pageRequest);
+        Page<Thread> threads = threadRepo.findAllByYafiUserUsernameOrderByCreatedOnAsc(username, pageRequest);
 
         ArrayList<ThreadDTO> threadDTOs = new ArrayList<>();
         for (Thread t: threads) {
             ThreadDTO threadDTO = new ThreadDTO();
             threadDTO.id = t.getId();
             threadDTO.content = t.getContent();
-            threadDTO.username = t.getUser().getUsername();
+            threadDTO.username = t.getYafiUser().getUsername();
             threadDTO.topicName = t.getTopic().getName();
             threadDTO.likeCount = t.getLikeCount();
             threadDTO.createdOn = t.getCreatedOn();
@@ -124,7 +124,7 @@ public class MainService {
         for (Topic t: topics) {
             TopicDTO topicDTO = new TopicDTO();
             topicDTO.name = t.getName();
-            topicDTO.createdBy = t.getUser().getUsername();
+            topicDTO.createdBy = t.getYafiUser().getUsername();
             topicDTOs.add(topicDTO);
         }
 
@@ -152,7 +152,7 @@ public class MainService {
         for (Topic t: topics) {
             TopicDTO topicDTO = new TopicDTO();
             topicDTO.name = t.getName();
-            topicDTO.createdBy = t.getUser().getUsername();
+            topicDTO.createdBy = t.getYafiUser().getUsername();
             topicDTOs.add(topicDTO);
         }
 
@@ -167,7 +167,7 @@ public class MainService {
             ThreadDTO threadDTO = new ThreadDTO();
             threadDTO.id = t.getId();
             threadDTO.content = t.getContent();
-            threadDTO.username = t.getUser().getUsername();
+            threadDTO.username = t.getYafiUser().getUsername();
             threadDTO.topicName = t.getTopic().getName();
             threadDTO.likeCount = t.getLikeCount();
             threadDTO.createdOn = t.getCreatedOn();

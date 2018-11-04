@@ -17,8 +17,8 @@ public class Topic {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "yafi_user_id")
+    private YafiUser yafiUser;
 
     private LocalDateTime createdOn;
 
@@ -38,12 +38,12 @@ public class Topic {
         this.name = name;
     }
 
-    public User getUser() {
-        return user;
+    public YafiUser getYafiUser() {
+        return yafiUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setYafiUser(YafiUser yafiUser) {
+        this.yafiUser = yafiUser;
     }
 
     public LocalDateTime getCreatedOn() {

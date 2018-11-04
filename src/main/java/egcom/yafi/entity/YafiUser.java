@@ -6,7 +6,8 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-public class User {
+@Table
+public class YafiUser {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;

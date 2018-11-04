@@ -16,8 +16,8 @@ public class Thread {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "yafi_user_id")
+    private YafiUser yafiUser;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
@@ -45,12 +45,12 @@ public class Thread {
         this.content = content;
     }
 
-    public User getUser() {
-        return user;
+    public YafiUser getYafiUser() {
+        return yafiUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setYafiUser(YafiUser yafiUser) {
+        this.yafiUser = yafiUser;
     }
 
     public Topic getTopic() {
