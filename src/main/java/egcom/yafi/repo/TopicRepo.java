@@ -11,8 +11,8 @@ public interface TopicRepo extends JpaRepository<Topic, Long> {
 
     Optional<Topic> findByName(String topicName);
 
-    @Query(value = "SELECT * FROM topic JOIN " +
-            "(SELECT topic_id, created_on FROM thread group by topic_id, created_on order by created_on desc limit 5)"
-            + " Y ON topic.id=topic_id order by Y.created_on desc", nativeQuery = true)
+    @Query( value = "select topic.*" +
+            "from topic, (select topic_id, MAX(created_on) AS thread_created_on from thread group by topic_id order by MAX(created_on) desc) AS x" +
+            "where x.topic_id = topic.id order by x.thread_created_on desc;", nativeQuery = true)
     List<Topic> readMostRecentlyUpdatedTopics();
 }
