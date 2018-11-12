@@ -103,4 +103,11 @@ public class MainController {
 
         return  threadPageDTO;
     }
+
+    @GetMapping("/topics/search")
+    public List<TopicDTO> searchByTopicName(@RequestParam("topicName") String topicName) {
+        List<TopicDTO> topicDTOs = mainService.searchByTopicName(topicName);
+
+        return topicDTOs;
+    }
 }

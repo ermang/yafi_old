@@ -180,4 +180,18 @@ public class MainService {
 
         return threadPageDTO;
     }
+
+    public List<TopicDTO> searchByTopicName(String topicName) {
+        List<Topic> topics = topicRepo.findFirst10ByNameContainingOrderByNameAsc(topicName);
+
+        ArrayList<TopicDTO> topicDTOs = new ArrayList<>();
+        for (Topic t: topics) {
+            TopicDTO topicDTO = new TopicDTO();
+            topicDTO.name = t.getName();
+            topicDTO.createdBy = t.getYafiUser().getUsername();
+            topicDTOs.add(topicDTO);
+        }
+
+        return topicDTOs;
+    }
 }
