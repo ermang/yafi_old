@@ -9,6 +9,7 @@ import egcom.yafi.packy.Role;
 import egcom.yafi.repo.ThreadRepo;
 import egcom.yafi.repo.TopicRepo;
 import egcom.yafi.repo.YafiUserRepo;
+import egcom.yafi.util.Entity2DTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,12 +27,14 @@ public class MainService {
     private final YafiUserRepo yafiUserRepo;
     private final ThreadRepo threadRepo;
     private final ActiveUserResolver activeUserResolver;
+    private final Entity2DTO entity2DTO;
 
     public MainService(TopicRepo topicRepo, YafiUserRepo yafiUserRepo, ThreadRepo threadRepo, ActiveUserResolver activeUserResolver) {
         this.topicRepo = topicRepo;
         this.yafiUserRepo = yafiUserRepo;
         this.threadRepo = threadRepo;
         this.activeUserResolver = activeUserResolver;
+        entity2DTO = new Entity2DTO();
     }
 
     public Long createTopic(CreateTopicDTO createTopicDTO) {
@@ -77,16 +80,8 @@ public class MainService {
         Page<Thread> threads = threadRepo.findAllByTopicNameOrderByCreatedOnAsc(topicName, pageRequest);
 
         ArrayList<ThreadDTO> threadDTOs = new ArrayList<>();
-        for (Thread t: threads) {
-            ThreadDTO threadDTO = new ThreadDTO();
-            threadDTO.id = t.getId();
-            threadDTO.content = t.getContent();
-            threadDTO.username = t.getYafiUser().getUsername();
-            threadDTO.topicName = t.getTopic().getName();
-            threadDTO.likeCount = t.getLikeCount();
-            threadDTO.createdOn = t.getCreatedOn();
-            threadDTOs.add(threadDTO);
-        }
+        for (Thread t: threads)
+            threadDTOs.add(entity2DTO.thread2ThreadDTO(t));
 
         ThreadPageDTO threadPageDTO = new ThreadPageDTO();
         threadPageDTO.threadDTOs = threadDTOs;
@@ -99,16 +94,8 @@ public class MainService {
         Page<Thread> threads = threadRepo.findAllByYafiUserUsernameOrderByCreatedOnAsc(username, pageRequest);
 
         ArrayList<ThreadDTO> threadDTOs = new ArrayList<>();
-        for (Thread t: threads) {
-            ThreadDTO threadDTO = new ThreadDTO();
-            threadDTO.id = t.getId();
-            threadDTO.content = t.getContent();
-            threadDTO.username = t.getYafiUser().getUsername();
-            threadDTO.topicName = t.getTopic().getName();
-            threadDTO.likeCount = t.getLikeCount();
-            threadDTO.createdOn = t.getCreatedOn();
-            threadDTOs.add(threadDTO);
-        }
+        for (Thread t: threads)
+            threadDTOs.add(entity2DTO.thread2ThreadDTO(t));
 
         ThreadPageDTO threadPageDTO = new ThreadPageDTO();
         threadPageDTO.threadDTOs = threadDTOs;
@@ -121,12 +108,8 @@ public class MainService {
         List<Topic> topics = topicRepo.findAll();
 
         ArrayList<TopicDTO> topicDTOs = new ArrayList<>();
-        for (Topic t: topics) {
-            TopicDTO topicDTO = new TopicDTO();
-            topicDTO.name = t.getName();
-            topicDTO.createdBy = t.getYafiUser().getUsername();
-            topicDTOs.add(topicDTO);
-        }
+        for (Topic t: topics)
+            topicDTOs.add(entity2DTO.topic2TopicDTO(t));
 
         return topicDTOs;
     }
@@ -149,12 +132,8 @@ public class MainService {
         List<Topic> topics = topicRepo.readMostRecentlyUpdatedTopics();
 
         ArrayList<TopicDTO> topicDTOs = new ArrayList<>();
-        for (Topic t: topics) {
-            TopicDTO topicDTO = new TopicDTO();
-            topicDTO.name = t.getName();
-            topicDTO.createdBy = t.getYafiUser().getUsername();
-            topicDTOs.add(topicDTO);
-        }
+        for (Topic t: topics)
+            topicDTOs.add(entity2DTO.topic2TopicDTO(t));
 
         return topicDTOs;
     }
@@ -163,16 +142,8 @@ public class MainService {
         Page<Thread> threads = threadRepo.findFirst25ByOrderByCreatedOn_Desc(pageRequest);
 
         ArrayList<ThreadDTO> threadDTOs = new ArrayList<>();
-        for (Thread t: threads) {
-            ThreadDTO threadDTO = new ThreadDTO();
-            threadDTO.id = t.getId();
-            threadDTO.content = t.getContent();
-            threadDTO.username = t.getYafiUser().getUsername();
-            threadDTO.topicName = t.getTopic().getName();
-            threadDTO.likeCount = t.getLikeCount();
-            threadDTO.createdOn = t.getCreatedOn();
-            threadDTOs.add(threadDTO);
-        }
+        for (Thread t: threads)
+            threadDTOs.add(entity2DTO.thread2ThreadDTO(t));
 
         ThreadPageDTO threadPageDTO = new ThreadPageDTO();
         threadPageDTO.threadDTOs = threadDTOs;
@@ -185,12 +156,8 @@ public class MainService {
         List<Topic> topics = topicRepo.findFirst10ByNameContainingOrderByNameAsc(topicName);
 
         ArrayList<TopicDTO> topicDTOs = new ArrayList<>();
-        for (Topic t: topics) {
-            TopicDTO topicDTO = new TopicDTO();
-            topicDTO.name = t.getName();
-            topicDTO.createdBy = t.getYafiUser().getUsername();
-            topicDTOs.add(topicDTO);
-        }
+        for (Topic t: topics)
+            topicDTOs.add(entity2DTO.topic2TopicDTO(t));
 
         return topicDTOs;
     }
