@@ -5,6 +5,8 @@ import egcom.yafi.dto.TopicDTO;
 import egcom.yafi.entity.Thread;
 import egcom.yafi.entity.Topic;
 
+import java.time.format.DateTimeFormatter;
+
 public class Entity2DTO {
 
     public ThreadDTO thread2ThreadDTO(Thread t) {
@@ -14,7 +16,7 @@ public class Entity2DTO {
         tDTO.username = t.getYafiUser().getUsername();
         tDTO.topicName = t.getTopic().getName();
         tDTO.likeCount = t.getLikeCount();
-        tDTO.createdOn = t.getCreatedOn();
+        tDTO.createdOn = t.getCreatedOn().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
         return tDTO;
     }
