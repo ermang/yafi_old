@@ -2,6 +2,7 @@ package egcom.yafi.repo;
 
 import egcom.yafi.dto.TopicDTO;
 import egcom.yafi.entity.Topic;
+import egcom.yafi.projection.TopicOnly;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -17,5 +18,5 @@ public interface TopicRepo extends JpaRepository<Topic, Long> {
             + " where x.topic_id = topic.id order by x.thread_created_on desc;", nativeQuery = true)
     List<Topic> readMostRecentlyUpdatedTopics();
 
-    List<Topic> findFirst10ByNameContainingOrderByNameAsc(String topicName);
+    List<TopicOnly> findFirst10ByNameContainingOrderByNameAsc(String topicName);
 }

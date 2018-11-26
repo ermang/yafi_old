@@ -4,6 +4,7 @@ import egcom.yafi.dto.ThreadDTO;
 import egcom.yafi.dto.TopicDTO;
 import egcom.yafi.entity.Thread;
 import egcom.yafi.entity.Topic;
+import egcom.yafi.projection.TopicOnly;
 
 import java.time.format.DateTimeFormatter;
 
@@ -25,6 +26,13 @@ public class Entity2DTO {
         TopicDTO topicDTO = new TopicDTO();
         topicDTO.name = t.getName();
         topicDTO.createdBy = t.getYafiUser().getUsername();
+
+        return topicDTO;
+    }
+
+    public TopicDTO topicOnly2TopicDTO(TopicOnly t) {
+        TopicDTO topicDTO = new TopicDTO();
+        topicDTO.name = t.getName();
 
         return topicDTO;
     }
