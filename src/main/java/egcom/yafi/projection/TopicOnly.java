@@ -1,7 +1,7 @@
-package egcom.yafi.projection;
-
-public interface TopicOnly {
-     String getName();
-
-
-}
+//package egcom.yafi.projection;
+//
+//public interface TopicOnly {
+//     String getName();
+//
+//
+//}

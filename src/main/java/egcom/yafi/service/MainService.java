@@ -6,7 +6,6 @@ import egcom.yafi.entity.Topic;
 import egcom.yafi.entity.YafiUser;
 import egcom.yafi.packy.ActiveUserResolver;
 import egcom.yafi.packy.Role;
-import egcom.yafi.projection.TopicOnly;
 import egcom.yafi.repo.ThreadRepo;
 import egcom.yafi.repo.TopicRepo;
 import egcom.yafi.repo.YafiUserRepo;
@@ -154,12 +153,12 @@ public class MainService {
     }
 
     public List<TopicDTO> searchByTopicName(String topicName) {
-        List<TopicOnly> topics = topicRepo.findFirst10ByNameContainingOrderByNameAsc(topicName);
+        List<TopicDTO> topics = topicRepo.findFirst10ByNameContainingOrderByNameAsc(topicName);
 
-        ArrayList<TopicDTO> topicDTOs = new ArrayList<>();
-        for (TopicOnly t: topics)
-            topicDTOs.add(entity2DTO.topicOnly2TopicDTO(t));
+//        ArrayList<TopicDTO> topicDTOs = new ArrayList<>();
+//        for (TopicOnly t: topics)
+//            topicDTOs.add(entity2DTO.topicOnly2TopicDTO(t));
 
-        return topicDTOs;
+        return topics;
     }
 }
